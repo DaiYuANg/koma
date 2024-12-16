@@ -1,9 +1,7 @@
 [versions]
 record-builder = "44"
 logback = "1.5.12"
-picocli = "4.7.6"
-clikt = "5.0.1"
-avaje-validaor = "2.4"
+clikt = "5.0.2"
 slf4j = "2.0.16"
 jackson = "2.18.2"
 asciidoctorj = "3.0.0"
@@ -12,6 +10,7 @@ koin = "4.1.0-Beta1"
 koin-annotation = "2.0.0-Beta2"
 tika = "3.0.0"
 mutiny = "2.7.0"
+kotlin-html = "0.11.0"
 
 [plugins]
 javamodularity = { id = "org.javamodularity.moduleplugin", version = "1.8.15" }
@@ -29,9 +28,6 @@ jlink = { id = "org.beryx.jlink", version = "3.1.1" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
 [libraries]
-picocli = { group = "info.picocli", name = "picocli", version.ref = "picocli" }
-picocli-codegen = { group = "info.picocli", name = "picocli-codegen", version.ref = "picocli" }
-picocli-shell-jline3 = { group = "info.picocli", name = "picocli-shell-jline3", version.ref = "picocli" }
 
 logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 logback-core = { group = "ch.qos.logback", name = "logback-core", version.ref = "logback" }
@@ -42,16 +38,8 @@ record-builder-core = { group = "io.soabase.record-builder", name = "record-buil
 junit-bom = { group = "org.junit", name = "junit-bom", version = "5.11.3" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
 
-guice-bom = { group = "com.google.inject", name = "guice-bom", version = "7.0.0" }
-guice = { group = "com.google.inject", name = "guice" }
-#avaje-inject = { group = "io.avaje", name = "avaje-inject", version.ref = "avaje-inject" }
-#avaje-inject-test = { group = "io.avaje", name = "avaje-inject-test", version.ref = "avaje-inject" }
-#avaje-inject-generator = { group = "io.avaje", name = "avaje-inject-generator", version.ref = "avaje-inject" }
-
-avaje-validaor = { group = "io.avaje", name = "avaje-validator", version.ref = "avaje-validaor" }
-avaje-validaor-constraints = { group = "io.avaje", name = "avaje-validator-constraints", version.ref = "avaje-validaor" }
-avaje-validaor-codegen = { group = "io.avaje", name = "avaje-validator-generator", version.ref = "avaje-validaor" }
-
+progressbar = { group = "me.tongfei", name = "progressbar", version = "0.10.1" }
+progressbar-ktx = { group = "dev.reimer", name = "progressbar-ktx", version = "0.1.0" }
 jansi = { group = "org.fusesource.jansi", name = "jansi", version = "2.4.1" }
 
 #Slf4j
@@ -101,6 +89,7 @@ plantuml = { group = "net.sourceforge.plantuml", name = "plantuml-mit", version 
 guava = { group = "com.google.guava", name = "guava", version = "33.3.1-jre" }
 
 github-api = { group = "org.kohsuke", name = "github-api", version = "2.0.0-alpha-2" }
+gitlab-api = { group = "org.gitlab4j", name = "gitlab4j-api", version = '6.0.0-rc.7' }
 
 kotlin-logging-jvm = { group = "io.github.oshai", name = "kotlin-logging-jvm", version = "7.0.3" }
 
@@ -111,6 +100,8 @@ koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }
 koin-logger-slf4j = { group = "io.insert-koin", name = "koin-logger-slf4j" }
 
+kotlinx-html-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-html-jvm", version.ref = "kotlin-html" }
+kotlinx-html = { group = "org.jetbrains.kotlinx", name = "kotlinx-html", version.ref = "kotlin-html" }
 kotlin-auto-service-ksp = { group = "dev.zacsweers.autoservice", name = "auto-service-ksp", version = "1.2.0" }
 kotlin-auto-service-annotations = { group = "com.google.auto.service", name = "auto-service-annotations", version = "1.1.1" }
 
@@ -124,3 +115,7 @@ mutiny-kotlin = { group = "io.smallrye.reactive", name = "mutiny-kotlin", versio
 
 clikt = { group = "com.github.ajalt.clikt", name = "clikt", version.ref = "clikt" }
 clikt-markdown = { group = "com.github.ajalt.clikt", name = "clikt-markdown", version.ref = "clikt" }
+
+jgit = { group = "org.eclipse.jgit", name = "org.eclipse.jgit", version = "7.1.0.202411261347-r" }
+
+ph-css = { group = "com.helger", name = "ph-css", version = "7.0.3" }

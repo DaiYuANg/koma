@@ -7,7 +7,7 @@ group = "org.koma.gradle.plugin"
 version = "1.0-SNAPSHOT"
 
 dependencies {
-  implementation(projects.komaCore)
+  implementation(projects.komaCompiler)
   testImplementation(kotlin("test"))
 }
 

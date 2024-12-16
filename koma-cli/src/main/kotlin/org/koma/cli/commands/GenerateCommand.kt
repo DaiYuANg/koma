@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.parameters.arguments.argument
-import com.github.ajalt.clikt.parameters.arguments.default
 import com.github.ajalt.clikt.parameters.arguments.defaultLazy
 import com.github.ajalt.clikt.parameters.arguments.help
 import com.github.ajalt.clikt.parameters.types.file
+import com.github.ajalt.mordant.widgets.ProgressBar
 import com.google.common.base.Stopwatch
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.apache.commons.io.FileUtils
@@ -40,6 +40,10 @@ class GenerateCommand : CliktCommand(), KoinComponent {
     val configFile = komaLayout.config().toFile();
     if (!configFile.exists()) {
       log.atError { message = "Config file does not exist: $configFile" };
+    }
+    me.tongfei.progressbar.ProgressBar("Test", 100).use {
+      it.stepTo(50)
+      it.setExtraMessage("Reading...");
     }
     FileUtils.openInputStream(configFile).use {
       val komaConfig = objectMapper.readValue(it, KomaConfig::class.java)

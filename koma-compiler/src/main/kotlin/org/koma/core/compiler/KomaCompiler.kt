@@ -2,6 +2,7 @@
 
 package org.koma.core.compiler
 
+import com.google.common.reflect.ClassPath
 import `in`.wilsonl.minifyhtml.Configuration
 import `in`.wilsonl.minifyhtml.MinifyHtml
 import io.github.oshai.kotlinlogging.KotlinLogging
@@ -29,6 +30,16 @@ class KomaCompiler {
     .setMinifyCss(true)
     .setMinifyJs(true)
     .build()
+
+  init {
+    ClassPath.from(ClassLoader.getSystemClassLoader())
+      .resources.filter {
+        it.resourceName.endsWith(".css")
+      }.forEach {
+        val resource = ClassLoader.getSystemClassLoader().getResourceAsStream(it.url().toExternalForm())
+        System.err.println(resource)
+      }
+  }
 
   fun compile(config: KomaConfig, layout: KomaLayout) {
     val outputFile = Path(config.output().directory()).toFile()

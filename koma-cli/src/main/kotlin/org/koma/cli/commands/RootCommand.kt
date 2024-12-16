@@ -25,7 +25,6 @@ class RootCommand : NoOpCliktCommand(), KoinComponent {
         val properties = Properties()
         properties.load(this)
         val version = properties.getValue("Implementation-Version")
-        println("Version: $version")
         versionOption(version.toString())
       }
   }

@@ -37,20 +37,21 @@ dependencies {
   implementation(libs.jansi)
   implementation(libs.clikt)
   implementation(libs.clikt.markdown)
+
+  implementation(libs.progressbar)
+  implementation(libs.progressbar.ktx)
   testImplementation(enforcedPlatform(libs.junit.bom))
   testImplementation(libs.junit.jupiter)
 
   implementation(libs.jackson.core)
   implementation(libs.jackson.dataformat.yaml)
 
-  implementation(projects.komaCore)
-  implementation(projects.feature.komaMarkdownFeature)
-  implementation(projects.feature.komaAsciidocFeature)
-  implementation(projects.feature.komaTemplateThymeleafFeature)
-}
+  implementation(libs.jgit)
 
-tasks.test {
-  useJUnitPlatform()
+  implementation(projects.komaCompiler)
+  implementation(projects.feature.komaMarkdown)
+  implementation(projects.feature.komaAsciidoc)
+  implementation(projects.feature.komaTemplateThymeleaf)
 }
 
 java {

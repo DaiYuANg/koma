@@ -10,14 +10,8 @@ group = "org.koma.core"
 
 dependencies {
   compileOnly(libs.jetbrains.annotation)
-  implementation(libs.handlebars)
   implementation(libs.slf4j)
   implementation(libs.record.builder.core)
-  implementation(libs.freemarker)
-  implementation(libs.thymeleaf)
-  implementation(libs.pebble)
-  implementation(libs.rocker)
-  implementation(libs.jte)
 
   implementation(libs.jackson.databind)
   implementation(libs.apache.common.io)
@@ -31,6 +25,9 @@ dependencies {
   implementation(projects.komaApi)
   implementation(libs.minify.html)
   implementation(libs.mutiny)
+  implementation("org.jetbrains.kotlin:kotlin-scripting-common")
+  implementation("org.jetbrains.kotlin:kotlin-scripting-jvm")
+  implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host")
   implementation("org.webjars.npm:tailwindcss:4.0.0-beta.3")
   implementation("org.webjars:bootstrap:5.3.3")
   implementation("org.webjars:webjars-locator-core:0.59")

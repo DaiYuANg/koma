@@ -21,11 +21,22 @@ buildCache {
 }
 rootProject.name = "koma"
 include("koma-cli")
-include("koma-core")
-include("integration:gradle-plugin")
-include("feature:koma-deploy-github-feature")
-include("feature:koma-asciidoc-feature")
-include("feature:koma-markdown-feature")
+include("koma-compiler")
 include("koma-api")
-include("feature:koma-template-thymeleaf-feature")
-findProject(":feature:koma-template-thymeleaf-feature")?.name = "koma-template-thymeleaf-feature"
+
+include("integration:gradle-plugin")
+
+include("feature:koma-deploy-github")
+include("feature:koma-asciidoc")
+include("feature:koma-markdown")
+include("feature:koma-template-thymeleaf")
+include("feature:koma-template-freemarker")
+include("feature:koma-deploy-gitlab")
+include("feature:koma-template-handlebars")
+findProject(":feature:koma-template-handlebars")?.name = "koma-template-handlebars"
+include("feature:koma-template-pebble")
+findProject(":feature:koma-template-pebble")?.name = "koma-template-pebble"
+include("feature:koma-template-rocker")
+findProject(":feature:koma-template-rocker")?.name = "koma-template-rocker"
+include("feature:koma-template-jte")
+findProject(":feature:koma-template-jte")?.name = "koma-template-jte"
