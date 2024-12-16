@@ -1,5 +1,6 @@
 package org.koma.cli.command;
 
+import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Command(name = "init", aliases = "i")
 @Singleton
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor_ = {@Inject})
 @Slf4j
 public class InitCommand implements Runnable {
   private final List<InitProcessor> processors;

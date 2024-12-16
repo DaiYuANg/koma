@@ -1,4 +1,4 @@
-package org.koma.core.api;
+package org.koma.api;
 
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.nodes.Document;

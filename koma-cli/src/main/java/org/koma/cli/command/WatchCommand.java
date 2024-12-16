@@ -8,7 +8,7 @@ import org.apache.commons.io.filefilter.HiddenFileFilter;
 import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.koma.cli.listener.LayoutListener;
-import org.koma.core.layout.KomaLayout;
+import org.koma.core.model.KomaLayout;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
@@ -30,7 +30,7 @@ public class WatchCommand implements Callable<Integer> {
       );
     val files = FileFilterUtils.and(FileFilterUtils.fileFileFilter());
     val filter = FileFilterUtils.or(directories, files);
-    val observer = FileAlterationObserver.builder().setPath(komaLayout.getBasePath())
+    val observer = FileAlterationObserver.builder().setPath(komaLayout.getPath())
       .setFileFilter(filter)
       .get();
     val interval = TimeUnit.SECONDS.toMillis(1);

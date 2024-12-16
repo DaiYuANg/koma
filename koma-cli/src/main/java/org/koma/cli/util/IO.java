@@ -17,7 +17,7 @@ public class IO {
     val dirFile = dir.toAbsolutePath().toFile();
     if (!dirFile.exists()) {
       if (dirFile.mkdir()) {
-        log.info("created {}", dir.toAbsolutePath().toString());
+        log.info("created {}", dir.toAbsolutePath());
       }
     }
   }

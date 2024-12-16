@@ -5,10 +5,14 @@ module org.koma.core {
   requires static java.compiler;
   requires org.apache.commons.io;
   requires org.slf4j;
-  requires org.jsoup;
+  requires transitive org.jsoup;
   requires kotlin.stdlib;
   requires org.asciidoctor.asciidoctorj;
   requires org.asciidoctor.asciidoctorj.api;
+  requires io.github.oshai.kotlinlogging;
+  requires webjars.locator.core;
+  requires koin.core.jvm;
+  requires flexmark.ext.tables;
 
   requires com.github.jknack.handlebars;
   requires gg.jte.runtime;
@@ -20,7 +24,7 @@ module org.koma.core {
   requires flexmark;
   requires thymeleaf;
 
-  exports org.koma.core.layout;
   exports org.koma.core.config;
   exports org.koma.core.compiler;
+  exports org.koma.core.model;
 }

@@ -18,7 +18,8 @@ dependencies {
   implementation(libs.rocker)
   implementation(libs.jte)
   implementation(libs.flexmark)
-  implementation(libs.jsoup)
+  implementation(projects.komaApi)
+
   implementation(libs.jackson.databind)
   implementation(libs.apache.common.io)
   compileOnly(libs.immutables.value)
@@ -27,6 +28,13 @@ dependencies {
   annotationProcessor(libs.record.builder.processor)
   testImplementation(platform(libs.junit.bom))
   testImplementation(libs.junit.jupiter)
+  implementation(libs.kotlin.logging.jvm)
+  implementation(enforcedPlatform(libs.koin.bom))
+  implementation(libs.koin.core)
+  implementation(libs.koin.logger.slf4j)
+  implementation("org.webjars.npm:tailwindcss:4.0.0-beta.3")
+  implementation("org.webjars:bootstrap:5.3.3")
+  implementation("org.webjars:webjars-locator-core:0.59")
   testImplementation(kotlin("test"))
 }
 

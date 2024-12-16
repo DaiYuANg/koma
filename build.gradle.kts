@@ -24,6 +24,7 @@ allprojects {
 
 subprojects {
   apply<KotlinPluginWrapper>()
+  apply<JavaLibraryPlugin>()
 
   project.extensions.getByType(KotlinJvmProjectExtension::class.java).apply {
     jvmToolchain(21)

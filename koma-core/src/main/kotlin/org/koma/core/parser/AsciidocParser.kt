@@ -2,13 +2,13 @@ package org.koma.core.parser
 
 import org.asciidoctor.Asciidoctor
 import org.asciidoctor.Options
-import org.asciidoctor.OptionsBuilder
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.koma.core.api.SourceParser
+import org.koin.java.KoinJavaComponent.inject
+import org.koma.api.SourceParser
 
 class AsciidocParser : SourceParser {
-  private val asciidoctor: Asciidoctor = Asciidoctor.Factory.create()
+  private val asciidoctor: Asciidoctor by inject(Asciidoctor::class.java)
   override fun parse(source: String): Document {
     val result = asciidoctor.convert(source.trim(), Options.builder().build())
     return Jsoup.parseBodyFragment(result)

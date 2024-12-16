@@ -6,7 +6,7 @@ import org.koma.cli.factory.PicocliFactory
 import org.koma.cli.provider.CommandLineProvider
 import org.koma.cli.provider.DotenvProvider
 import org.koma.cli.provider.LayoutProvider
-import org.koma.core.layout.KomaLayout
+import org.koma.core.model.KomaLayout
 import picocli.CommandLine
 
 class CliModule : AbstractModule() {

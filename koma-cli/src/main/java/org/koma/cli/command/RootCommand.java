@@ -1,5 +1,6 @@
 package org.koma.cli.command;
 
+import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ import java.util.concurrent.Callable;
 )
 @Slf4j
 @Singleton
+@RequiredArgsConstructor(onConstructor_ = {@Inject})
 public class RootCommand implements Callable<Integer> {
 
   @Override

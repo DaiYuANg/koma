@@ -23,5 +23,7 @@ rootProject.name = "koma"
 include("koma-cli")
 include("koma-core")
 include("integration:gradle-plugin")
-include("deploy:koma-deploy-github")
+include("feature:koma-deploy-github-feature")
 include("feature:koma-asciidoc-feature")
+include("feature:koma-markdown-feature")
+include("koma-api")

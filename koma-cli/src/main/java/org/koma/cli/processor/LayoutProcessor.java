@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.koma.cli.util.IO;
-import org.koma.core.layout.KomaLayout;
+import org.koma.core.model.KomaLayout;
 
 import java.util.List;
 
