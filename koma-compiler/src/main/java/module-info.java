@@ -6,16 +6,15 @@ module org.koma.core {
   requires org.apache.commons.io;
   requires org.slf4j;
   requires io.github.oshai.kotlinlogging;
-  requires webjars.locator.core;
   requires com.google.common;
   requires minify.html;
   requires io.smallrye.mutiny;
+  requires maven.embedder;
 
   requires org.immutables.value;
   requires com.fasterxml.jackson.databind;
   requires kotlin.stdlib;
   requires org.koma.api;
-  requires bootstrap;
 
   exports org.koma.core.config;
   exports org.koma.core.compiler;

@@ -2,12 +2,14 @@
 
 package org.koma.core.compiler
 
+import com.fasterxml.jackson.databind.util.ClassUtil
 import com.google.common.reflect.ClassPath
 import `in`.wilsonl.minifyhtml.Configuration
 import `in`.wilsonl.minifyhtml.MinifyHtml
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.smallrye.mutiny.Uni
 import org.apache.commons.io.FileUtils
+import org.apache.commons.io.IOUtils
 import org.koma.api.Engine
 import org.koma.api.SourceParser
 import org.koma.core.config.KomaConfig
@@ -15,6 +17,9 @@ import org.koma.core.context.CompileContext
 import org.koma.core.model.KomaLayout
 import org.koma.core.util.outputFilename
 import org.koma.core.vistor.CompileSourceVisitor
+import org.webjars.WebJarAssetLocator
+import java.net.URI
+import java.net.URL
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.time.Duration
@@ -32,12 +37,17 @@ class KomaCompiler {
     .build()
 
   init {
+    val bootstrap = WebJarAssetLocator().getFullPath("bootstrap.js");
+    System.err.println(bootstrap)
+    val a = ClassLoader.getSystemClassLoader().getResourceAsStream(bootstrap)
+    System.err.println(IOUtils.resourceToString(bootstrap, StandardCharsets.UTF_8, ClassLoader.getSystemClassLoader()))
     ClassPath.from(ClassLoader.getSystemClassLoader())
       .resources.filter {
         it.resourceName.endsWith(".css")
       }.forEach {
-        val resource = ClassLoader.getSystemClassLoader().getResourceAsStream(it.url().toExternalForm())
-        System.err.println(resource)
+        it.url().openStream().use { input ->
+          val result = IOUtils.toString(input, StandardCharsets.UTF_8.name())
+        }
       }
   }
 

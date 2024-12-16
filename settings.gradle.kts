@@ -33,10 +33,10 @@ include("feature:koma-template-thymeleaf")
 include("feature:koma-template-freemarker")
 include("feature:koma-deploy-gitlab")
 include("feature:koma-template-handlebars")
-findProject(":feature:koma-template-handlebars")?.name = "koma-template-handlebars"
 include("feature:koma-template-pebble")
-findProject(":feature:koma-template-pebble")?.name = "koma-template-pebble"
 include("feature:koma-template-rocker")
-findProject(":feature:koma-template-rocker")?.name = "koma-template-rocker"
 include("feature:koma-template-jte")
-findProject(":feature:koma-template-jte")?.name = "koma-template-jte"
+
+include("module:koma-frontend-ecosystem")
+include("feature:koma-theme-bootstrap")
+findProject(":feature:koma-theme-bootstrap")?.name = "koma-theme-bootstrap"

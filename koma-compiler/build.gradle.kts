@@ -25,12 +25,13 @@ dependencies {
   implementation(projects.komaApi)
   implementation(libs.minify.html)
   implementation(libs.mutiny)
+
+  implementation(libs.maven.embedder)
   implementation("org.jetbrains.kotlin:kotlin-scripting-common")
   implementation("org.jetbrains.kotlin:kotlin-scripting-jvm")
   implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host")
   implementation("org.webjars.npm:tailwindcss:4.0.0-beta.3")
-  implementation("org.webjars:bootstrap:5.3.3")
-  implementation("org.webjars:webjars-locator-core:0.59")
+
   testImplementation(kotlin("test"))
 }
 

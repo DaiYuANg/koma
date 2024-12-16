@@ -49,6 +49,7 @@ dependencies {
   implementation(libs.jgit)
 
   implementation(projects.komaCompiler)
+  implementation(projects.feature.komaThemeBootstrap)
   implementation(projects.feature.komaMarkdown)
   implementation(projects.feature.komaAsciidoc)
   implementation(projects.feature.komaTemplateThymeleaf)

@@ -119,3 +119,9 @@ clikt-markdown = { group = "com.github.ajalt.clikt", name = "clikt-markdown", ve
 jgit = { group = "org.eclipse.jgit", name = "org.eclipse.jgit", version = "7.1.0.202411261347-r" }
 
 ph-css = { group = "com.helger", name = "ph-css", version = "7.0.3" }
+
+webjars-locator-core = { group = "org.webjars", name = "webjars-locator-core", version = "0.59" }
+
+bootstrap = { group = "org.webjars", name = "bootstrap", version = "5.3.3" }
+
+maven-embedder = {group="org.apache.maven",name="maven-embedder",version="4.0.0-rc-1"}
