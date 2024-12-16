@@ -34,9 +34,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-koma.yaml
-content
-templates
+
 assetstarget/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -131,3 +129,8 @@ deploy/
 javadoc/
 cwallet.sso.lck
 .idea
+.kotlin
+output
+koma.yaml
+content
+./templates

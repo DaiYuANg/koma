@@ -27,3 +27,5 @@ include("feature:koma-deploy-github-feature")
 include("feature:koma-asciidoc-feature")
 include("feature:koma-markdown-feature")
 include("koma-api")
+include("feature:koma-template-thymeleaf-feature")
+findProject(":feature:koma-template-thymeleaf-feature")?.name = "koma-template-thymeleaf-feature"

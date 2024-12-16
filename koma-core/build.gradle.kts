@@ -9,6 +9,7 @@ plugins {
 group = "org.koma.core"
 
 dependencies {
+  compileOnly(libs.jetbrains.annotation)
   implementation(libs.handlebars)
   implementation(libs.slf4j)
   implementation(libs.record.builder.core)
@@ -17,21 +18,19 @@ dependencies {
   implementation(libs.pebble)
   implementation(libs.rocker)
   implementation(libs.jte)
-  implementation(libs.flexmark)
-  implementation(projects.komaApi)
 
   implementation(libs.jackson.databind)
   implementation(libs.apache.common.io)
   compileOnly(libs.immutables.value)
-  implementation(libs.asciidoctorj)
   annotationProcessor(libs.immutables.value)
   annotationProcessor(libs.record.builder.processor)
   testImplementation(platform(libs.junit.bom))
   testImplementation(libs.junit.jupiter)
   implementation(libs.kotlin.logging.jvm)
-  implementation(enforcedPlatform(libs.koin.bom))
-  implementation(libs.koin.core)
-  implementation(libs.koin.logger.slf4j)
+  implementation(libs.guava)
+  implementation(projects.komaApi)
+  implementation(libs.minify.html)
+  implementation(libs.mutiny)
   implementation("org.webjars.npm:tailwindcss:4.0.0-beta.3")
   implementation("org.webjars:bootstrap:5.3.3")
   implementation("org.webjars:webjars-locator-core:0.59")
@@ -48,9 +47,12 @@ java {
 
 tasks.compileJava {
   extensions.configure<CompileModuleOptions> {
-    addModules = listOf("flexmark.util.data", "flexmark")
     patchModules.config = listOf("org.koma.core=${sourceSets["main"].output.asPath}")
   }
   modularity.inferModulePath.set(true)
   println(options)
+}
+
+tasks.jar {
+  duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

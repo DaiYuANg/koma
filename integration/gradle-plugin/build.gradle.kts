@@ -18,10 +18,6 @@ tasks.test {
 gradlePlugin {
   val komaGradlePlugin by plugins.creating {
     id = "org.koma.gradle.plugin"
-    implementationClass = "org.koma.gradle.plugin.KomaGradlePlugin"
+    implementationClass = "org.koma.gradle.plugin.KomaPlugin"
   }
-}
-
-kotlin {
-  jvmToolchain(21)
 }

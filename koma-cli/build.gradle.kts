@@ -1,26 +1,28 @@
 plugins {
-  java
   application
   alias(libs.plugins.graalvm)
   alias(libs.plugins.lombok)
   alias(libs.plugins.maniftest)
-  alias(libs.plugins.jlink)
   alias(libs.plugins.shadow)
+  alias(libs.plugins.ksp)
 }
 
-val mainClassPath = "org.koma.cli.KomaCLI"
-val mainModulePath = "org.koma.cli"
+val mainClassPath = "org.koma.cli.KomaCLIKt"
 
 application {
   mainClass = mainClassPath
-  mainModule = mainModulePath
 }
 
 group = "org.koma.cli"
 
 dependencies {
-  implementation(enforcedPlatform(libs.guice.bom))
-  implementation(libs.guice)
+  implementation(enforcedPlatform(libs.koin.bom))
+  ksp(enforcedPlatform(libs.koin.annotation.bom))
+  implementation(enforcedPlatform(libs.koin.annotation.bom))
+  implementation(libs.koin.core)
+  implementation(libs.koin.logger.slf4j)
+  implementation(libs.koin.annotation)
+  ksp(libs.koin.ksp.compiler)
   compileOnly(libs.jetbrains.annotation)
   implementation(libs.dotenv)
   implementation(libs.apache.common.io)
@@ -31,47 +33,61 @@ dependencies {
   implementation(libs.logback.core)
   implementation(libs.logback.classic)
   implementation(libs.kotlin.logging.jvm)
-//  implementation(libs.avaje.inject)
   implementation(libs.directories)
-//  annotationProcessor(libs.avaje.inject.generator)
-  implementation(projects.komaCore)
   implementation(libs.jansi)
-  implementation(libs.picocli)
-  annotationProcessor(libs.picocli.codegen)
-  implementation(libs.picocli.shell.jline3)
+  implementation(libs.clikt)
+  implementation(libs.clikt.markdown)
   testImplementation(enforcedPlatform(libs.junit.bom))
   testImplementation(libs.junit.jupiter)
 
   implementation(libs.jackson.core)
   implementation(libs.jackson.dataformat.yaml)
+
+  implementation(projects.komaCore)
+  implementation(projects.feature.komaMarkdownFeature)
+  implementation(projects.feature.komaAsciidocFeature)
+  implementation(projects.feature.komaTemplateThymeleafFeature)
 }
 
 tasks.test {
   useJUnitPlatform()
 }
 
-tasks.compileJava {
-  options.compilerArgumentProviders.add(CommandLineArgumentProvider {
-    // Provide compiled Kotlin classes to javac – needed for Java/Kotlin mixed sources to work
-    listOf("--patch-module", "YOUR_MODULE_NAME=${sourceSets["main"].output.asPath}")
-  })
-  options.compilerArgs.addAll(listOf("-Aproject=${project.group}/${project.name}"))
+java {
+  modularity.inferModulePath.set(true)
 }
 
 graalvmNative {
   metadataRepository {
     enabled = true
   }
+  toolchainDetection.set(true)
+  agent {
+    enableExperimentalPredefinedClasses.set(true)
+    enableExperimentalUnsafeAllocationTracing.set(true)
+    trackReflectionMetadata.set(true)
+    metadataCopy {
+      mergeWithExisting.set(true)
+    }
+  }
   binaries {
     named("main") {
-      mainClass.set("org.koma.cli.KomaCLI")
+      mainClass.set(mainClassPath)
       sharedLibrary.set(false)
       debug.set(false)
       quickBuild.set(true)
       richOutput.set(true)
+
       buildArgs(
+        "-H:+UnlockExperimentalVMOptions",
+        "-H:+ReportUnsupportedElementsAtRuntime",
+        "-H:+ReportExceptionStackTraces",
+        "-H:TraceClassInitialization=true",
         """
-          --trace-class-initialization=ch.qos.logback.core.CoreConstants,ch.qos.logback.core.util.StatusPrinter2,ch.qos.logback.core.status.StatusBase,ch.qos.logback.core.status.InfoStatus,org.slf4j.jdk.platform.logging.SLF4JPlatformLogger,ch.qos.logback.core.util.StatusPrinter,ch.qos.logback.core.util.Loader,org.slf4j.spi.DefaultLoggingEventBuilder,org.slf4j.jdk.platform.logging.SLF4JPlatformLogger\${'$'}1,org.slf4j.LoggerFactory,ch.qos.logback.classic.Logger,ch.qos.logback.classic.Level,org.slf4j.helpers.Reporter
+          --trace-class-initialization=org.jcodings.spi.Charsets,org.slf4j.LoggerFactory,ch.qos.logback.core.status.StatusBase,org.jcodings.spi.ISO_8859_16,ch.qos.logback.core.status.InfoStatus,ch.qos.logback.core.util.Loader,ch.qos.logback.core.CoreConstants,org.slf4j.helpers.Reporter,ch.qos.logback.classic.Level,org.slf4j.jdk.platform.logging.SLF4JPlatformLogger,ch.qos.logback.core.util.StatusPrinter2,ch.qos.logback.core.util.StatusPrinter,org.slf4j.jdk.platform.logging.SLF4JPlatformLogger${'$'}1,ch.qos.logback.classic.Logger,org.slf4j.spi.DefaultLoggingEventBuilder
+        """.trimIndent(),
+        """
+          --initialize-at-run-time=org.slf4j.jdk.platform.logging.SLF4JSystemLoggerFinder.getLogger,ch.qos.logback.core.status.InfoStatus
         """.trimIndent()
       )
     }
@@ -79,54 +95,8 @@ graalvmNative {
 }
 
 tasks.jar {
+  duplicatesStrategy = DuplicatesStrategy.INCLUDE
+  dependsOn(tasks.collectReachabilityMetadata)
   from(tasks.collectReachabilityMetadata)
 }
 
-jlink {
-  options = listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
-  enableCds()
-  mainClass.set(mainClassPath)
-  moduleName.set(mainModulePath)
-  addExtraDependencies("jackson", "jetty", "jline")
-  mergedModule {
-    requires("com.fasterxml.jackson.core");
-    requires("com.google.j2objc.annotations");
-    requires("com.fasterxml.jackson.databind");
-    requires("java.logging");
-    requires("java.sql");
-    requires("jdk.jdi");
-    requires("java.xml");
-    requires("java.rmi");
-    requires("jetty.servlet.api");
-    requires("java.desktop");
-    requires("org.slf4j");
-    requires("info.picocli");
-    requires("jdk.unsupported");
-    requires("org.jetbrains.annotations");
-    requires("com.google.errorprone.annotations");
-    requires("java.management");
-    requires("jdk.attach");
-    requires("org.checkerframework.checker.qual");
-    requires("java.datatransfer");
-    requires("java.compiler");
-    requires("java.instrument");
-    provides("org.jline.terminal.provider.jansi").with("org.jline.terminal.impl.jansi.JansiTerminalProvider")
-    provides("org.jline.terminal.provider.jna").with("org.jline.terminal.impl.jna.JnaTerminalProvider")
-    provides("org.jline.terminal.provider.ffm").with("org.jline.terminal.impl.ffm.FfmTerminalProvider")
-    provides("org.jline.terminal.provider.jni").with("org.jline.terminal.impl.jni.JniTerminalProvider")
-    provides("org.jline.terminal.provider.exec").with("org.jline.terminal.impl.exec.ExecTerminalProvider")
-  }
-}
-
-tasks.compileKotlin {
-  val javaCompile = tasks.compileJava
-  destinationDirectory = javaCompile.get().destinationDirectory
-}
-
-kotlin {
-  jvmToolchain(21)
-}
-
-//java {
-//  modularity.inferModulePath.set(true)
-//}

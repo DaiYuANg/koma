@@ -30,3 +30,7 @@ Compile: file -> parse language -> assign template -> post assign -> output
 |   |-- /contact.html             
 |-- /config.yml                # config file
 ```
+
+## TODO
+ - [ ] process link
+ - [ ] theme system
