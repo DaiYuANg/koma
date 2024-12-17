@@ -1,4 +1,4 @@
-package org.koma.feature.markdown
+package org.koma.feature.markdown.extension.mermaid
 
 import com.vladsch.flexmark.parser.InlineParser
 import com.vladsch.flexmark.parser.block.BlockContinue

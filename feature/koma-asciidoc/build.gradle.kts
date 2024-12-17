@@ -15,10 +15,7 @@ dependencies {
   implementation(projects.komaApi)
   implementation(libs.kotlin.logging.jvm)
   implementation(libs.asciidoctorj)
-}
-
-tasks.test {
-  useJUnitPlatform()
+  implementation(libs.asciidoctorj.diagram)
 }
 
 tasks.compileJava {

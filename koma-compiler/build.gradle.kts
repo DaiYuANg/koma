@@ -25,8 +25,9 @@ dependencies {
   implementation(projects.komaApi)
   implementation(libs.minify.html)
   implementation(libs.mutiny)
+  implementation(libs.apache.common.collection)
 
-  implementation(libs.maven.embedder)
+//  implementation(libs.maven.embedder)
   implementation("org.jetbrains.kotlin:kotlin-scripting-common")
   implementation("org.jetbrains.kotlin:kotlin-scripting-jvm")
   implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host")

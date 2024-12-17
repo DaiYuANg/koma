@@ -1,4 +1,4 @@
-package org.koma.feature.markdown
+package org.koma.feature.markdown.extension.mermaid
 
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.util.data.MutableDataHolder

@@ -1,4 +1,4 @@
-package org.koma.cli.commands
+package org.koma.cli.command
 
 import com.github.ajalt.clikt.core.CliktCommand
 import org.koin.core.annotation.Single

@@ -1,9 +1,8 @@
-package org.koma.cli.commands
+package org.koma.cli.command
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
-import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.boolean
 import io.javalin.Javalin
 import org.koin.core.annotation.Single

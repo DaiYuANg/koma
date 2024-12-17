@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.github.ajalt.clikt.core.main
-import com.github.ajalt.clikt.core.subcommands
 import com.google.common.util.concurrent.AbstractIdleService
-import com.google.common.util.concurrent.Service
 import com.google.common.util.concurrent.ServiceManager
 import io.github.cdimascio.dotenv.Dotenv
 import org.fusesource.jansi.AnsiConsole.systemInstall
@@ -15,7 +13,7 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 import org.koin.core.context.startKoin
 import org.koin.ksp.generated.*
-import org.koma.cli.commands.*
+import org.koma.cli.command.*
 import org.koma.core.model.KomaLayout
 import kotlin.io.path.Path
 

@@ -2,14 +2,10 @@
 
 package org.koma.core.compiler
 
-import com.fasterxml.jackson.databind.util.ClassUtil
-import com.google.common.reflect.ClassPath
 import `in`.wilsonl.minifyhtml.Configuration
 import `in`.wilsonl.minifyhtml.MinifyHtml
 import io.github.oshai.kotlinlogging.KotlinLogging
-import io.smallrye.mutiny.Uni
 import org.apache.commons.io.FileUtils
-import org.apache.commons.io.IOUtils
 import org.koma.api.Engine
 import org.koma.api.SourceParser
 import org.koma.core.config.KomaConfig
@@ -17,15 +13,9 @@ import org.koma.core.context.CompileContext
 import org.koma.core.model.KomaLayout
 import org.koma.core.util.outputFilename
 import org.koma.core.vistor.CompileSourceVisitor
-import org.webjars.WebJarAssetLocator
-import java.net.URI
-import java.net.URL
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
-import java.time.Duration
 import java.util.*
-import java.util.concurrent.Executors
-import java.util.function.Consumer
 import kotlin.io.path.Path
 
 class KomaCompiler {
@@ -36,20 +26,6 @@ class KomaCompiler {
     .setMinifyJs(true)
     .build()
 
-  init {
-    val bootstrap = WebJarAssetLocator().getFullPath("bootstrap.js");
-    System.err.println(bootstrap)
-    val a = ClassLoader.getSystemClassLoader().getResourceAsStream(bootstrap)
-    System.err.println(IOUtils.resourceToString(bootstrap, StandardCharsets.UTF_8, ClassLoader.getSystemClassLoader()))
-    ClassPath.from(ClassLoader.getSystemClassLoader())
-      .resources.filter {
-        it.resourceName.endsWith(".css")
-      }.forEach {
-        it.url().openStream().use { input ->
-          val result = IOUtils.toString(input, StandardCharsets.UTF_8.name())
-        }
-      }
-  }
 
   fun compile(config: KomaConfig, layout: KomaLayout) {
     val outputFile = Path(config.output().directory()).toFile()
@@ -67,35 +43,17 @@ class KomaCompiler {
 
     val templateProcessors = ServiceLoader.load(Engine::class.java).toSet()
 
-    Uni.combine().all()
-      .unis<Uni<Void>>(compileContext.process)
-      .usingConcurrencyOf(compileContext.process.size)
-      .discardItems()
-      .await()
-      .indefinitely()
-
-    val writeProcess = compileContext.htmlContext.map { (filename, document) ->
-      Uni.createFrom()
-        .item(document.body())
-        .emitOn(Executors.newVirtualThreadPerTaskExecutor())
-        .map { templateProcessors.first().parse(it.html()) }
-        .map { MinifyHtml.minify(it, cfg) }
-        .invoke(Consumer {
-          val outputPath = Path(config.output().directory(), outputFilename(filename, document.hashCode()))
-          FileUtils.writeStringToFile(
-            outputPath.toFile(),
-            it,
-            StandardCharsets.UTF_8
-          )
-        })
-    }.toList()
-
-    Uni.combine().all()
-      .unis<Uni<Void>>(writeProcess)
-      .usingConcurrencyOf(writeProcess.size)
-      .with {
-        log.info { "KomaCompiler end" }
-      }
+    compileContext.htmlContext.forEach { (filename, document) ->
+      val body = document.body()
+      val template = templateProcessors.first().parse(body.html())
+      val compressed = MinifyHtml.minify(template, cfg)
+      val outputPath = Path(config.output().directory(), outputFilename(filename, document.hashCode()))
+      FileUtils.writeStringToFile(
+        outputPath.toFile(),
+        compressed,
+        StandardCharsets.UTF_8
+      )
+    }
   }
 }
 

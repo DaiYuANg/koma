@@ -1,4 +1,4 @@
-package org.koma.cli.commands
+package org.koma.cli.command
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.ajalt.clikt.core.CliktCommand
@@ -7,10 +7,11 @@ import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.defaultLazy
 import com.github.ajalt.clikt.parameters.arguments.help
 import com.github.ajalt.clikt.parameters.types.file
-import com.github.ajalt.mordant.widgets.ProgressBar
 import com.google.common.base.Stopwatch
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.apache.commons.io.FileUtils
+import org.fusesource.jansi.Ansi
+import org.fusesource.jansi.Ansi.ansi
 import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -48,9 +49,13 @@ class GenerateCommand : CliktCommand(), KoinComponent {
     FileUtils.openInputStream(configFile).use {
       val komaConfig = objectMapper.readValue(it, KomaConfig::class.java)
       KomaCompiler().compile(komaConfig, komaLayout)
-      val second = stopwatch.elapsed(TimeUnit.SECONDS);
-      println(second);
-      stopwatch.stop();
+      println(
+        ansi()
+          .bold()
+          .fgBrightDefault()
+          .render("Compile:${stopwatch.elapsed(TimeUnit.SECONDS)}s").reset()
+      )
+      stopwatch.stop()
     }
   }
 

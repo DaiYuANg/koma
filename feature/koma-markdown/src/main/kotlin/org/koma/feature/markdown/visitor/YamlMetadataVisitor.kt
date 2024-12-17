@@ -1,4 +1,4 @@
-package org.koma.feature.markdown
+package org.koma.feature.markdown.visitor
 
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterBlock
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterNode
@@ -8,7 +8,7 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 class YamlMetadataVisitor : YamlFrontMatterVisitor {
   private val log = KotlinLogging.logger {}
   override fun visit(node: YamlFrontMatterNode) {
-    log.atDebug { message="node:${node.key}" }
+    log.atDebug { message = "node:${node.key}" }
   }
 
   override fun visit(block: YamlFrontMatterBlock) {

@@ -15,8 +15,13 @@ module org.koma.feature.markdown {
   requires flexmark.ext.anchorlink;
   requires flexmark.ext.aside;
   requires flexmark.ext.toc;
+  requires flexmark.ext.attributes;
   requires flexmark.ext.yaml.front.matter;
   requires flexmark.ext.youtube.embedded;
+  requires flexmark.profile.pegdown;
+  requires flexmark.ext.resizable.image;
+  requires flexmark.ext.admonition;
+  requires flexmark.ext.enumerated.reference;
 
   exports org.koma.feature.markdown;
 }

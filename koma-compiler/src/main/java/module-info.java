@@ -9,12 +9,13 @@ module org.koma.core {
   requires com.google.common;
   requires minify.html;
   requires io.smallrye.mutiny;
-  requires maven.embedder;
+//  requires maven.embedder;
 
   requires org.immutables.value;
   requires com.fasterxml.jackson.databind;
   requires kotlin.stdlib;
   requires org.koma.api;
+  requires org.apache.commons.collections4;
 
   exports org.koma.core.config;
   exports org.koma.core.compiler;

@@ -11,6 +11,7 @@ koin-annotation = "2.0.0-Beta2"
 tika = "3.0.0"
 mutiny = "2.7.0"
 kotlin-html = "0.11.0"
+eclipse-collections = "12.0.0.M3"
 
 [plugins]
 javamodularity = { id = "org.javamodularity.moduleplugin", version = "1.8.15" }
@@ -35,7 +36,7 @@ logback-core = { group = "ch.qos.logback", name = "logback-core", version.ref = 
 record-builder-processor = { group = "io.soabase.record-builder", name = "record-builder-processor", version.ref = "record-builder" }
 record-builder-core = { group = "io.soabase.record-builder", name = "record-builder-core", version.ref = "record-builder" }
 
-junit-bom = { group = "org.junit", name = "junit-bom", version = "5.11.3" }
+junit-bom = { group = "org.junit", name = "junit-bom", version = "5.11.4" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
 
 progressbar = { group = "me.tongfei", name = "progressbar", version = "0.10.1" }
@@ -64,6 +65,7 @@ jte = { group = "gg.jte", name = "jte", version = "3.1.15" }
 # Marked Languages
 flexmark = { group = "com.vladsch.flexmark", name = "flexmark-all", version = "0.64.8" }
 asciidoctorj = { group = "org.asciidoctor", name = "asciidoctorj", version.ref = "asciidoctorj" }
+asciidoctorj-diagram = { group = "org.asciidoctor", name = "asciidoctorj-diagram", version = "2.3.1" }
 
 immutables-value = { group = "org.immutables", name = "value", version = "2.10.1" }
 
@@ -81,12 +83,14 @@ apache-common-io = { group = "commons-io", name = "commons-io", version = "2.18.
 apache-common-lang3 = { group = "org.apache.commons", name = "commons-lang3", version = "3.17.0" }
 apache-common-collection = { group = "org.apache.commons", name = "commons-collections4", version = "4.5.0-M2" }
 apache-common-text = { group = "org.apache.commons", name = "commons-text", version = "1.13.0" }
-apache-common-db-util = { group = "commons-dbutils", name = "commons-dbutils", version = "1.8.1" }
 data-faker = { group = "net.datafaker", name = "datafaker", version = "2.4.2" }
+
+eclipse-collections-api = { group = "org.eclipse.collections", name = "eclipse-collections-api", version.ref = "eclipse-collections" }
+eclipse-collections = { group = "org.eclipse.collections", name = "eclipse-collections", version.ref = "eclipse-collections" }
 
 plantuml = { group = "net.sourceforge.plantuml", name = "plantuml-mit", version = "1.2024.8" }
 
-guava = { group = "com.google.guava", name = "guava", version = "33.3.1-jre" }
+guava = { group = "com.google.guava", name = "guava", version = "33.4.0-jre" }
 
 github-api = { group = "org.kohsuke", name = "github-api", version = "2.0.0-alpha-2" }
 gitlab-api = { group = "org.gitlab4j", name = "gitlab4j-api", version = '6.0.0-rc.7' }
@@ -124,4 +128,4 @@ webjars-locator-core = { group = "org.webjars", name = "webjars-locator-core", v
 
 bootstrap = { group = "org.webjars", name = "bootstrap", version = "5.3.3" }
 
-maven-embedder = {group="org.apache.maven",name="maven-embedder",version="4.0.0-rc-1"}
+maven-embedder = { group = "org.apache.maven", name = "maven-embedder", version = "4.0.0-rc-1" }
