@@ -3,6 +3,8 @@ package org.koma.cli
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.ajalt.clikt.core.main
 import com.google.common.util.concurrent.AbstractIdleService
 import com.google.common.util.concurrent.ServiceManager
@@ -30,7 +32,7 @@ class CliModule {
   fun objectMapper(): ObjectMapper {
     val mapper = ObjectMapper(YAMLFactory())
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    return mapper
+    return mapper.registerKotlinModule()
   }
 
   @Single

@@ -1,5 +1,5 @@
 module org.koma.thymeleaf.feature {
-  requires org.koma.api;
+  requires org.koma.shared;
   requires kotlin.stdlib;
   requires com.google.auto.service;
   requires thymeleaf;

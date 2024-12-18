@@ -1,7 +1,7 @@
 package org.koma.core.model
 
 import org.jetbrains.annotations.Contract
-import org.koma.core.constant.ConfigConstant
+import org.koma.core.config.FILE_NAME
 import java.nio.file.Path
 
 data class KomaLayout(private val _basePath: Path) {
@@ -9,7 +9,7 @@ data class KomaLayout(private val _basePath: Path) {
     get() = _basePath
 
   fun config(): Path {
-    return _basePath.resolve(ConfigConstant.FILE_NAME)
+    return _basePath.resolve(FILE_NAME)
   }
 
   fun content(): Path {

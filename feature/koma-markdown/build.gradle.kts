@@ -9,7 +9,9 @@ group = "org.koma.feature.markdown"
 version = "1.0-SNAPSHOT"
 
 dependencies {
-  compileOnly(projects.komaApi)
+  implementation(libs.tika.core)
+  implementation(libs.tika.parsers)
+  compileOnly(projects.komaShared)
   implementation(libs.flexmark)
   implementation(libs.kotlin.logging.jvm)
   ksp(libs.kotlin.auto.service.ksp)

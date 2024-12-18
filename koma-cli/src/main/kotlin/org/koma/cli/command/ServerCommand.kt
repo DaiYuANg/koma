@@ -9,7 +9,7 @@ import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 
 @Single
-class ServerCommand : CliktCommand(), KoinComponent {
+class ServerCommand : BaseCommand(), KoinComponent {
 
   private val watch: Boolean by option().boolean().default(false)
 

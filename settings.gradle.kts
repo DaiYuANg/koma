@@ -22,7 +22,7 @@ buildCache {
 rootProject.name = "koma"
 include("koma-cli")
 include("koma-compiler")
-include("koma-api")
+include("koma-shared")
 
 include("integration:gradle-plugin")
 

@@ -12,7 +12,7 @@ version = "1.0-SNAPSHOT"
 dependencies {
   ksp(libs.kotlin.auto.service.ksp)
   implementation(libs.kotlin.auto.service.annotations)
-  implementation(projects.komaApi)
+  implementation(projects.komaShared)
   implementation(libs.kotlin.logging.jvm)
   implementation(libs.asciidoctorj)
   implementation(libs.asciidoctorj.diagram)

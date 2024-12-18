@@ -11,7 +11,8 @@ import com.vladsch.flexmark.util.data.DataSet
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.koma.api.SourceParser
+import org.koma.shared.SourceParseContext
+import org.koma.shared.SourceParser
 import org.koma.feature.markdown.factory.create
 import org.koma.feature.markdown.visitor.YamlFrontMatterVisitor
 
@@ -31,13 +32,14 @@ class MarkdownParser : SourceParser {
     VisitHandler(YamlFrontMatterNode::class.java, YamlFrontMatterVisitor())
   )
 
-  override fun parseable(extension: String): Boolean {
-    log.info { "Parsing $extension ${supportExtension.contains(extension)}" }
-    return supportExtension.contains(extension)
+  override fun parseable(context: SourceParseContext): Boolean {
+
+    log.info { "Parsing ${context.extension} ${supportExtension.contains(context.extension)}" }
+    return supportExtension.contains(context.extension)
   }
 
-  override fun parse(source: String): Document {
-    val markdownNodes: Node = parser.parse(source)
+  override fun parse(context: SourceParseContext): Document {
+    val markdownNodes: Node = parser.parse(context.source)
     globalVisitor.visit(markdownNodes)
     val htmlRenderer = renderer.render(markdownNodes)
     return Jsoup.parseBodyFragment(htmlRenderer)

@@ -6,7 +6,7 @@ plugins {
 }
 dependencies {
   implementation(libs.kotlin.logging.jvm)
-  implementation(projects.komaApi)
+  implementation(projects.komaShared)
   implementation(libs.thymeleaf)
   ksp(libs.kotlin.auto.service.ksp)
   implementation(libs.kotlin.auto.service.annotations)

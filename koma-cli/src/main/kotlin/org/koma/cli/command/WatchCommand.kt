@@ -14,7 +14,7 @@ import org.koma.core.model.KomaLayout
 import java.util.concurrent.TimeUnit
 
 @Single
-class WatchCommand : CliktCommand(), KoinComponent {
+class WatchCommand : BaseCommand(), KoinComponent {
 
   private val log = KotlinLogging.logger {}
   private val layoutListener by inject<LayoutListener>()

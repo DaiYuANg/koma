@@ -1,5 +1,4 @@
 [versions]
-record-builder = "44"
 logback = "1.5.12"
 clikt = "5.0.2"
 slf4j = "2.0.16"
@@ -33,9 +32,6 @@ kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 logback-core = { group = "ch.qos.logback", name = "logback-core", version.ref = "logback" }
 
-record-builder-processor = { group = "io.soabase.record-builder", name = "record-builder-processor", version.ref = "record-builder" }
-record-builder-core = { group = "io.soabase.record-builder", name = "record-builder-core", version.ref = "record-builder" }
-
 junit-bom = { group = "org.junit", name = "junit-bom", version = "5.11.4" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
 
@@ -67,8 +63,6 @@ flexmark = { group = "com.vladsch.flexmark", name = "flexmark-all", version = "0
 asciidoctorj = { group = "org.asciidoctor", name = "asciidoctorj", version.ref = "asciidoctorj" }
 asciidoctorj-diagram = { group = "org.asciidoctor", name = "asciidoctorj-diagram", version = "2.3.1" }
 
-immutables-value = { group = "org.immutables", name = "value", version = "2.10.1" }
-
 dotenv = { group = "io.github.cdimascio", name = "dotenv-java", version = "3.1.0" }
 
 #jackson
@@ -76,6 +70,7 @@ jackson-core = { group = "com.fasterxml.jackson.core", name = "jackson-core", ve
 jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson" }
 jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jackson" }
 jackson-dataformat-yaml = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson" }
+jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
 
 jsoup = { group = "org.jsoup", name = "jsoup", version = "1.18.3" }
 

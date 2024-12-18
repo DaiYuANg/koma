@@ -14,10 +14,9 @@ import org.koma.cli.processor.InitProcessor
 import java.io.File
 
 @Single
-class InitCommand : CliktCommand(), KoinComponent {
+class InitCommand : BaseCommand(), KoinComponent {
   private val log = KotlinLogging.logger {}
   private val enableRepository: Boolean by option().boolean().default(false).help("Enable Git repository")
-  private val folder: File by option().file(mustExist = false).default(File(""))
   private val initProcessor: InitProcessor by inject()
   override fun run() {
     if (enableRepository) {

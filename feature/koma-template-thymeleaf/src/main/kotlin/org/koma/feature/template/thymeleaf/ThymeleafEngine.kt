@@ -2,8 +2,8 @@ package org.koma.feature.template.thymeleaf
 
 import com.google.auto.service.AutoService
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.koma.api.Engine
-import org.koma.api.TemplatePlaceholder
+import org.koma.shared.Engine
+import org.koma.shared.TemplatePlaceholder
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver

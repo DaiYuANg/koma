@@ -1,5 +1,5 @@
 module org.koma.feature.markdown {
-  requires org.koma.api;
+  requires org.koma.shared;
   requires org.jsoup;
   requires flexmark;
   requires kotlin.stdlib;
@@ -22,6 +22,7 @@ module org.koma.feature.markdown {
   requires flexmark.ext.resizable.image;
   requires flexmark.ext.admonition;
   requires flexmark.ext.enumerated.reference;
+  requires org.apache.tika.core;
 
   exports org.koma.feature.markdown;
 }
