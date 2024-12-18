@@ -1,7 +1,6 @@
 import org.javamodularity.moduleplugin.extensions.CompileModuleOptions
 
 plugins {
-  alias(libs.plugins.lombok)
   alias(libs.plugins.javamodularity)
 }
 

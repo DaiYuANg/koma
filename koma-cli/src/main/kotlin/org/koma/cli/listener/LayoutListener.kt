@@ -1,7 +1,6 @@
 package org.koma.cli.listener
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import lombok.extern.slf4j.Slf4j
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor
 import org.apache.commons.io.monitor.FileAlterationObserver
 import org.koin.core.annotation.Single

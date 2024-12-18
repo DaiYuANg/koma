@@ -1,5 +1,4 @@
 module org.koma.compiler {
-  requires static lombok;
   requires org.apache.commons.io;
   requires org.slf4j;
   requires io.github.oshai.kotlinlogging;
@@ -12,8 +11,8 @@ module org.koma.compiler {
   requires org.koma.shared;
   requires kotlin.stdlib;
 
-  exports org.koma.core.config;
-  exports org.koma.core.compiler;
-  exports org.koma.core.model;
+  exports org.koma.compiler.config;
+  exports org.koma.compiler.compiler;
+  exports org.koma.compiler.model;
 
 }

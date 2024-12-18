@@ -2,7 +2,6 @@ import org.javamodularity.moduleplugin.extensions.CompileModuleOptions
 
 plugins {
   alias(libs.plugins.javamodularity)
-  alias(libs.plugins.ksp)
 }
 
 group = "org.koma.feature.markdown"
@@ -13,10 +12,6 @@ dependencies {
   implementation(libs.tika.parsers)
   compileOnly(projects.komaShared)
   implementation(libs.flexmark)
-  implementation(libs.kotlin.logging.jvm)
-  ksp(libs.kotlin.auto.service.ksp)
-  implementation(libs.kotlin.auto.service.annotations)
-  testImplementation(kotlin("test"))
 }
 
 tasks.test {

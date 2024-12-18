@@ -1,7 +1,6 @@
 plugins {
   application
   alias(libs.plugins.graalvm)
-  alias(libs.plugins.lombok)
   alias(libs.plugins.maniftest)
   alias(libs.plugins.shadow)
   alias(libs.plugins.ksp)
@@ -32,7 +31,6 @@ dependencies {
   implementation(libs.slf4j.jdk.platform.logging)
   implementation(libs.logback.core)
   implementation(libs.logback.classic)
-  implementation(libs.kotlin.logging.jvm)
   implementation(libs.directories)
   implementation(libs.jansi)
   implementation(libs.clikt)
@@ -54,6 +52,7 @@ dependencies {
   implementation(projects.feature.komaMarkdown)
   implementation(projects.feature.komaAsciidoc)
   implementation(projects.feature.komaTemplateThymeleaf)
+  implementation(projects.feature.komaThemeBootstrap)
 }
 
 java {
@@ -102,4 +101,3 @@ tasks.jar {
   dependsOn(tasks.collectReachabilityMetadata)
   from(tasks.collectReachabilityMetadata)
 }
-

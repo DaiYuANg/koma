@@ -8,7 +8,6 @@ version = "1.0-SNAPSHOT"
 
 dependencies {
   implementation(projects.komaCompiler)
-  testImplementation(kotlin("test"))
 }
 
 tasks.test {

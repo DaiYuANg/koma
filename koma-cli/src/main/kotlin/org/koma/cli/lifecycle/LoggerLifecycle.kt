@@ -3,7 +3,6 @@ package org.koma.cli.lifecycle
 import ch.qos.logback.classic.LoggerContext
 import com.google.common.util.concurrent.AbstractIdleService
 import io.github.oshai.kotlinlogging.KotlinLogging
-import lombok.extern.slf4j.Slf4j
 import org.koin.core.annotation.Single
 import org.slf4j.LoggerFactory
 

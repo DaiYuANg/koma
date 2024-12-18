@@ -7,8 +7,10 @@ import org.asciidoctor.Options
 import org.asciidoctor.SafeMode
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.koma.shared.SourceParseContext
-import org.koma.shared.SourceParser
+import org.koma.shared.context.SourceParseContext
+import org.koma.shared.api.SourceParser
+import org.koma.shared.data.structure.DocumentMetadata
+import org.koma.shared.data.structure.KomaDocument
 
 @AutoService(SourceParser::class)
 class AsciidocParser : SourceParser {
@@ -21,7 +23,7 @@ class AsciidocParser : SourceParser {
     return supportExtension.contains(context.extension)
   }
 
-  override fun parse(context: SourceParseContext): Document {
+  override fun parse(context: SourceParseContext): KomaDocument {
     val asciiDocument = asciidoctor.load(
       context.extension, Options.builder()
         .safe(SafeMode.UNSAFE)
@@ -31,6 +33,12 @@ class AsciidocParser : SourceParser {
     )
     log.atInfo { "Title:${asciiDocument.title}" }
     log.atInfo { "Authors:${asciiDocument.authors}" }
-    return Jsoup.parseBodyFragment(asciiDocument.convert())
+    return KomaDocument(
+      htmlDocument = Jsoup.parseBodyFragment(asciiDocument.convert()),
+      metadata = DocumentMetadata(
+        title = asciiDocument.title,
+        author = null
+      )
+    )
   }
 }

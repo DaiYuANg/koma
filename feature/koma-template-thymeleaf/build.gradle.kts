@@ -5,12 +5,8 @@ plugins {
   alias(libs.plugins.javamodularity)
 }
 dependencies {
-  implementation(libs.kotlin.logging.jvm)
   implementation(projects.komaShared)
   implementation(libs.thymeleaf)
-  ksp(libs.kotlin.auto.service.ksp)
-  implementation(libs.kotlin.auto.service.annotations)
-  testImplementation(kotlin("test"))
 }
 
 tasks.test {

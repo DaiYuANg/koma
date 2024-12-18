@@ -1,25 +1,18 @@
 package org.koma.cli.command
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.Context
-import com.github.ajalt.clikt.parameters.arguments.argument
-import com.github.ajalt.clikt.parameters.arguments.defaultLazy
-import com.github.ajalt.clikt.parameters.arguments.help
-import com.github.ajalt.clikt.parameters.types.file
 import com.google.common.base.Stopwatch
 import io.github.oshai.kotlinlogging.KotlinLogging
 import me.tongfei.progressbar.ProgressBar
 import org.apache.commons.io.FileUtils
-import org.fusesource.jansi.Ansi
 import org.fusesource.jansi.Ansi.ansi
 import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koma.core.compiler.KomaCompiler
-import org.koma.core.config.KomaConfig
-import org.koma.core.model.KomaLayout
-import java.io.File
+import org.koma.compiler.compiler.KomaCompiler
+import org.koma.compiler.config.KomaConfig
+import org.koma.compiler.model.KomaLayout
 import java.util.concurrent.TimeUnit
 
 @Single

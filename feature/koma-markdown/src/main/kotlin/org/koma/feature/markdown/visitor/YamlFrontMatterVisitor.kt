@@ -3,16 +3,26 @@ package org.koma.feature.markdown.visitor
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterNode
 import com.vladsch.flexmark.util.ast.Visitor
 import io.github.oshai.kotlinlogging.KotlinLogging
+import org.koma.feature.markdown.context.ParseContext
+import java.util.stream.Collectors
 
-class YamlFrontMatterVisitor : Visitor<YamlFrontMatterNode> {
-  private val wordCount = 0
+class YamlFrontMatterVisitor(
+  private val context: ParseContext,
+) : Visitor<YamlFrontMatterNode> {
   private val log = KotlinLogging.logger {}
-  private val yamlMetadataVisitor = YamlMetadataVisitor()
-  override fun visit(p0: YamlFrontMatterNode) {
-    yamlMetadataVisitor.visit(p0)
-  }
+  override fun visit(node: YamlFrontMatterNode) {
+    val value = node.values.stream().collect(Collectors.joining(","))
+    log.atDebug { message = "value:${value}" }
 
-//  override fun visit(p0: Text) {
-//    log.atInfo { "${p0.chars.unescape()} visit" }
-//  }
+    when (node.key) {
+      TITLE -> {
+        context.title = value
+      }
+
+      AUTHOR -> {
+        context.author = value
+      }
+    }
+    log.atDebug { message = "node:${node.key}" }
+  }
 }

@@ -3,7 +3,6 @@ package org.koma.cli
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.ajalt.clikt.core.main
 import com.google.common.util.concurrent.AbstractIdleService
@@ -16,7 +15,7 @@ import org.koin.core.annotation.Single
 import org.koin.core.context.startKoin
 import org.koin.ksp.generated.*
 import org.koma.cli.command.*
-import org.koma.core.model.KomaLayout
+import org.koma.compiler.model.KomaLayout
 import kotlin.io.path.Path
 
 @Module

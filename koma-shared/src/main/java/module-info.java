@@ -3,7 +3,10 @@ module org.koma.shared {
   requires static org.jetbrains.annotations;
   requires kotlin.stdlib;
   requires org.eclipse.collections.api;
-  requires  com.helger.css;
+  requires com.helger.css;
 
-  exports org.koma.shared;
+  exports org.koma.shared.api;
+  exports org.koma.shared.context;
+  exports org.koma.shared.data.structure;
+  exports org.koma.shared.data;
 }

@@ -1,6 +1,5 @@
 package org.koma.cli.command
 
-import com.github.ajalt.clikt.core.CliktCommand
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.apache.commons.io.filefilter.FileFilterUtils
 import org.apache.commons.io.filefilter.HiddenFileFilter
@@ -10,7 +9,7 @@ import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koma.cli.listener.LayoutListener
-import org.koma.core.model.KomaLayout
+import org.koma.compiler.model.KomaLayout
 import java.util.concurrent.TimeUnit
 
 @Single

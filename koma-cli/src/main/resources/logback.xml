@@ -29,6 +29,6 @@
     <appender-ref ref="ASYNC"/>
   </root>
 
-  <logger name="org.komal" level="DEBUG"/>
+  <logger name="org.koma" level="DEBUG"/>
   <logger name="java.lang.ProcessBuilder" level="OFF"/>
 </configuration>

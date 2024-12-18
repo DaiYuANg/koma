@@ -31,6 +31,10 @@ subprojects {
   project.extensions.getByType(KotlinJvmProjectExtension::class.java).apply {
     jvmToolchain(21)
   }
+  project.dependencies{
+    implementation(rootProject.libs.kotlin.logging.jvm)
+    testImplementation(kotlin("test"))
+  }
   project.tasks.test {
     useJUnitPlatform()
   }

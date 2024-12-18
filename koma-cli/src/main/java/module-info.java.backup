@@ -14,7 +14,7 @@ module org.koma.cli {
   requires io.javalin;
   requires org.apache.commons.io;
   requires io.github.cdimascio.dotenv.java;
-//  requires org.koma.core;
+//  requires org.koma.compiler;
   requires dev.dirs;
   requires com.google.common;
   requires io.github.oshai.kotlinlogging;
