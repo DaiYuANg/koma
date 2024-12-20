@@ -10,18 +10,20 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile
 import com.vladsch.flexmark.profile.pegdown.Extensions
 import com.vladsch.flexmark.util.data.DataHolder
 
-
 class HeaderNodeRenderer(
-  private val options: DataHolder
+    private val options: DataHolder,
 ) : NodeRenderer {
-  override fun getNodeRenderingHandlers(): MutableSet<NodeRenderingHandler<*>> {
-    return mutableSetOf(
-      NodeRenderingHandler(AnchorLink::class.java, this::render),
-      NodeRenderingHandler(Heading::class.java, this::render)
-    )
-  }
+  override fun getNodeRenderingHandlers(): MutableSet<NodeRenderingHandler<*>> =
+      mutableSetOf(
+          NodeRenderingHandler(AnchorLink::class.java, this::render),
+          NodeRenderingHandler(Heading::class.java, this::render),
+      )
 
-  fun render(node: AnchorLink, context: NodeRendererContext, html: HtmlWriter?) {
+  fun render(
+      node: AnchorLink,
+      context: NodeRendererContext,
+      html: HtmlWriter?,
+  ) {
     val parent = node.parent
 
     if (parent is Heading && parent.level == 1) {
@@ -31,15 +33,20 @@ class HeaderNodeRenderer(
     }
   }
 
-  fun render(node: Heading, context: NodeRendererContext, html: HtmlWriter) {
+  fun render(
+      node: Heading,
+      context: NodeRendererContext,
+      html: HtmlWriter,
+  ) {
     if (node.level == 1) {
       // render without anchor link
       val extensions = ParserEmulationProfile.PEGDOWN_EXTENSIONS[context.options]
-      if (context.htmlOptions.renderHeaderId || haveExtension(extensions, Extensions.ANCHORLINKS) || haveAllExtensions(
-          extensions,
-          Extensions.EXTANCHORLINKS or Extensions.EXTANCHORLINKS_WRAP
-        )
-      ) {
+      if (context.htmlOptions.renderHeaderId ||
+          haveExtension(extensions, Extensions.ANCHORLINKS) ||
+          haveAllExtensions(
+              extensions,
+              Extensions.EXTANCHORLINKS or Extensions.EXTANCHORLINKS_WRAP,
+          )) {
         val id = context.getNodeId(node)
         if (id != null) {
           html.attr("id", id)
@@ -60,11 +67,13 @@ class HeaderNodeRenderer(
     }
   }
 
-  private fun haveExtension(extensions: Int, flags: Int): Boolean {
-    return (extensions and flags) != 0
-  }
+  private fun haveExtension(
+      extensions: Int,
+      flags: Int,
+  ): Boolean = (extensions and flags) != 0
 
-  private fun haveAllExtensions(extensions: Int, flags: Int): Boolean {
-    return (extensions and flags) == flags
-  }
+  private fun haveAllExtensions(
+      extensions: Int,
+      flags: Int,
+  ): Boolean = (extensions and flags) == flags
 }

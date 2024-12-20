@@ -8,17 +8,15 @@ import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 
-
 @AutoService(Template::class)
 class Thymeleaf : Template {
-
-  private val classLoaderTemplateResolver = ClassLoaderTemplateResolver().apply {
-    prefix = "templates/"
-    suffix = ".html"
-  }
-  private val templateEngine: TemplateEngine = TemplateEngine().apply {
-    setTemplateResolver(classLoaderTemplateResolver)
-  }
+  private val classLoaderTemplateResolver =
+      ClassLoaderTemplateResolver().apply {
+        prefix = "templates/"
+        suffix = ".html"
+      }
+  private val templateEngine: TemplateEngine =
+      TemplateEngine().apply { setTemplateResolver(classLoaderTemplateResolver) }
   private val log = KotlinLogging.logger {}
 
   override fun parse(content: String): String {

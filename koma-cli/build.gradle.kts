@@ -8,9 +8,7 @@ plugins {
 
 val mainClassPath = "org.koma.cli.KomaCLIKt"
 
-application {
-  mainClass = mainClassPath
-}
+application { mainClass = mainClassPath }
 
 group = "org.koma.cli"
 
@@ -55,22 +53,16 @@ dependencies {
   implementation(projects.feature.komaThemeBootstrap)
 }
 
-java {
-  modularity.inferModulePath.set(true)
-}
+java { modularity.inferModulePath.set(true) }
 
 graalvmNative {
-  metadataRepository {
-    enabled = true
-  }
+  metadataRepository { enabled = true }
   toolchainDetection.set(true)
   agent {
     enableExperimentalPredefinedClasses.set(true)
     enableExperimentalUnsafeAllocationTracing.set(true)
     trackReflectionMetadata.set(true)
-    metadataCopy {
-      mergeWithExisting.set(true)
-    }
+    metadataCopy { mergeWithExisting.set(true) }
   }
   binaries {
     named("main") {
@@ -81,17 +73,18 @@ graalvmNative {
       richOutput.set(true)
 
       buildArgs(
-        "-H:+UnlockExperimentalVMOptions",
-        "-H:+ReportUnsupportedElementsAtRuntime",
-        "-H:+ReportExceptionStackTraces",
-        "-H:TraceClassInitialization=true",
-        """
+          "-H:+UnlockExperimentalVMOptions",
+          "-H:+ReportUnsupportedElementsAtRuntime",
+          "-H:+ReportExceptionStackTraces",
+          "-H:TraceClassInitialization=true",
+          """
           --trace-class-initialization=org.jcodings.spi.Charsets,org.slf4j.LoggerFactory,ch.qos.logback.core.status.StatusBase,org.jcodings.spi.ISO_8859_16,ch.qos.logback.core.status.InfoStatus,ch.qos.logback.core.util.Loader,ch.qos.logback.core.CoreConstants,org.slf4j.helpers.Reporter,ch.qos.logback.classic.Level,org.slf4j.jdk.platform.logging.SLF4JPlatformLogger,ch.qos.logback.core.util.StatusPrinter2,ch.qos.logback.core.util.StatusPrinter,org.slf4j.jdk.platform.logging.SLF4JPlatformLogger${'$'}1,ch.qos.logback.classic.Logger,org.slf4j.spi.DefaultLoggingEventBuilder
-        """.trimIndent(),
         """
+              .trimIndent(),
+          """
           --initialize-at-run-time=org.slf4j.jdk.platform.logging.SLF4JSystemLoggerFinder.getLogger,ch.qos.logback.core.status.InfoStatus
-        """.trimIndent()
-      )
+        """
+              .trimIndent())
     }
   }
 }

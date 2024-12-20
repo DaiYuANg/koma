@@ -1,10 +1,9 @@
 import org.javamodularity.moduleplugin.extensions.CompileModuleOptions
 
-plugins {
-  alias(libs.plugins.javamodularity)
-}
+plugins { alias(libs.plugins.javamodularity) }
 
 group = "org.koma.shared"
+
 version = "1.0-SNAPSHOT"
 
 dependencies {
@@ -14,7 +13,6 @@ dependencies {
   api(libs.jsoup)
   api(libs.ph.css)
 }
-
 
 tasks.compileJava {
   extensions.configure<CompileModuleOptions> {

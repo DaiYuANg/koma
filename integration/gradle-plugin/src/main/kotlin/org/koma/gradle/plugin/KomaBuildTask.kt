@@ -26,8 +26,7 @@ abstract class KomaBuildTask : DefaultTask() {
   @get:Optional
   abstract val tag: Property<String>
 
-  @get:OutputFile
-  abstract val outputFile: RegularFileProperty
+  @get:OutputFile abstract val outputFile: RegularFileProperty
 
   @TaskAction
   fun sampleAction() {

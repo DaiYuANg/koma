@@ -1,14 +1,15 @@
 package org.koma.cli.listener
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import java.io.File
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor
 import org.apache.commons.io.monitor.FileAlterationObserver
 import org.koin.core.annotation.Single
-import java.io.File
 
 @Single
 class LayoutListener : FileAlterationListenerAdaptor() {
   private val log = KotlinLogging.logger {}
+
   override fun onDirectoryCreate(directory: File) {
     log.atInfo { message = "onDirectoryCreate,${directory.absolutePath}" }
   }
@@ -18,6 +19,6 @@ class LayoutListener : FileAlterationListenerAdaptor() {
   }
 
   override fun onStart(observer: FileAlterationObserver) {
-    log.atInfo { message = "onStart,${observer}" }
+    log.atInfo { message = "onStart,$observer" }
   }
 }

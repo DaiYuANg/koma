@@ -1,5 +1,5 @@
 package org.koma.shared.api
 
-interface Template{
+interface Template {
   fun parse(content: String): String
 }

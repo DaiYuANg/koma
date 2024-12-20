@@ -1,3 +1,3 @@
 package org.koma.shared.api
 
-interface Feature 
+interface Feature

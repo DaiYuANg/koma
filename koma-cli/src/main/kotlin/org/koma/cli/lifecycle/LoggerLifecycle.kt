@@ -6,7 +6,6 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import org.koin.core.annotation.Single
 import org.slf4j.LoggerFactory
 
-
 @Single
 class LoggerLifecycle : AbstractIdleService() {
   private val log = KotlinLogging.logger {}

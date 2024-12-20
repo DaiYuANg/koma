@@ -1,6 +1,4 @@
-plugins {
-
-}
+plugins {}
 
 group = "org.koma"
 

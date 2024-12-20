@@ -12,18 +12,21 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koma.cli.util.checkDirExistsOrCreate
 import org.koma.compiler.model.KomaLayout
-import java.io.File
 
 @Single
 class InitCommand : BaseCommand(), KoinComponent {
   private val log = KotlinLogging.logger {}
-  private val enableRepository: Boolean by option().boolean().default(false).help("Enable Git repository")
+  private val enableRepository: Boolean by
+      option().boolean().default(false).help("Enable Git repository")
   private val komaLayout: KomaLayout by inject()
+
   override fun run() {
     if (enableRepository) {
       Git.init()
     }
-    echo(Ansi.ansi().fgBrightCyan().bold().render("init").reset())
+    echo(
+        Ansi.ansi().fgBrightCyan().bold().render("init").reset(),
+    )
     if (folder.exists()) {
       log.atInfo { "Folder $folder already exists" }
     }
@@ -32,9 +35,7 @@ class InitCommand : BaseCommand(), KoinComponent {
   }
 
   private fun generateDir() {
-    val processDir = listOf(komaLayout.content, komaLayout.templates(), komaLayout.assets());
-    processDir.forEach {
-      checkDirExistsOrCreate(it)
-    }
+    val processDir = listOf(komaLayout.content, komaLayout.templates(), komaLayout.assets())
+    processDir.forEach { checkDirExistsOrCreate(it) }
   }
 }

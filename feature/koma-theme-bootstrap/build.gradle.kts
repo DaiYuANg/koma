@@ -1,8 +1,6 @@
 import org.javamodularity.moduleplugin.extensions.CompileModuleOptions
 
-plugins {
-  alias(libs.plugins.javamodularity)
-}
+plugins { alias(libs.plugins.javamodularity) }
 
 group = "org.koma.theme.bootstrap"
 

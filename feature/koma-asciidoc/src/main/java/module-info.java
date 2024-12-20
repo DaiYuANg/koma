@@ -5,6 +5,7 @@ module org.koma.feature.asciidoc {
   requires kotlin.stdlib;
   requires com.google.auto.service;
   requires io.github.oshai.kotlinlogging;
+  requires org.apache.tika.core;
 
   exports org.koma.feature.asciidoc;
 }

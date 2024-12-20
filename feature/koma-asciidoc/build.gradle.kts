@@ -7,10 +7,13 @@ plugins {
 }
 
 group = "org.koma"
+
 version = "1.0-SNAPSHOT"
 
 dependencies {
   implementation(projects.komaShared)
+  implementation(libs.tika.core)
+  implementation(libs.tika.parsers)
   implementation(libs.asciidoctorj)
   implementation(libs.asciidoctorj.diagram)
 }

@@ -13,23 +13,29 @@ import com.vladsch.flexmark.util.sequence.BasedSequence
 class MermaidBlockParser : BlockParser {
   private val content = StringBuilder()
   private val processBuilder = ProcessBuilder()
+
   override fun isContainer(): Boolean {
     TODO("Not yet implemented")
   }
 
-  override fun canContain(p0: ParserState?, p1: BlockParser?, p2: Block?): Boolean {
+  override fun canContain(
+      p0: ParserState?,
+      p1: BlockParser?,
+      p2: Block?,
+  ): Boolean {
     TODO("Not yet implemented")
   }
 
-  override fun getBlock(): Block {
-    return MermaidNode(content.toString());
-  }
+  override fun getBlock(): Block = MermaidNode(content.toString())
 
   override fun tryContinue(p0: ParserState?): BlockContinue {
     TODO("Not yet implemented")
   }
 
-  override fun addLine(p0: ParserState?, p1: BasedSequence?) {
+  override fun addLine(
+      p0: ParserState?,
+      p1: BasedSequence?,
+  ) {
     TODO("Not yet implemented")
   }
 

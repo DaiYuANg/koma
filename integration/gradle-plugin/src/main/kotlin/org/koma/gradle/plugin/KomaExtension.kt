@@ -1,14 +1,16 @@
 package org.koma.gradle.plugin
 
+import javax.inject.Inject
 import org.gradle.api.Project
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
-import javax.inject.Inject
 
 @Suppress("UnnecessaryAbstractClass")
 abstract class KomaExtension
 @Inject
-constructor(project: Project) {
+constructor(
+    project: Project,
+) {
   private val objects = project.objects
 
   // Example of a property that is mandatory. The task will
@@ -20,7 +22,9 @@ constructor(project: Project) {
 
   // Example of a property with a default set with .convention
   val outputFile: RegularFileProperty =
-    objects.fileProperty().convention(
-      project.layout.buildDirectory.file("docs"),
-    )
+      objects
+          .fileProperty()
+          .convention(
+              project.layout.buildDirectory.file("docs"),
+          )
 }

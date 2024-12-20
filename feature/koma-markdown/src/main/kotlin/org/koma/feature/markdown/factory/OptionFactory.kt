@@ -13,36 +13,34 @@ import com.vladsch.flexmark.ext.tables.TablesExtension
 import com.vladsch.flexmark.ext.toc.TocExtension
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension
 import com.vladsch.flexmark.ext.youtube.embedded.YouTubeLinkExtension
-import com.vladsch.flexmark.html.HtmlRenderer
-import com.vladsch.flexmark.html.HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_MAP
-import com.vladsch.flexmark.html.HtmlRendererOptions
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.data.DataSet
 import com.vladsch.flexmark.util.data.MutableDataSet
 import org.koma.feature.markdown.extension.header.HeaderExtension
-import java.util.concurrent.ConcurrentHashMap
+import org.koma.feature.markdown.extension.link.LinkExtension
 
-val extensions = listOf(
-  TablesExtension.create(),
-  StrikethroughExtension.create(),
-  EmojiExtension.create(),
-  AutolinkExtension.create(),
-  AnchorLinkExtension.create(),
-  AdmonitionExtension.create(),
-  AsideExtension.create(),
-  TocExtension.create(),
-  AttributesExtension.create(),
-  EnumeratedReferenceExtension.create(),
-  YamlFrontMatterExtension.create(),
-  YouTubeLinkExtension.create(),
-  HeaderExtension.create(),
-  ResizableImageExtension.create()
-)
+val extensions =
+    listOf(
+        TablesExtension.create(),
+        StrikethroughExtension.create(),
+        EmojiExtension.create(),
+        AutolinkExtension.create(),
+        AnchorLinkExtension.create(),
+        AdmonitionExtension.create(),
+        AsideExtension.create(),
+        TocExtension.create(),
+        AttributesExtension.create(),
+        EnumeratedReferenceExtension.create(),
+        YamlFrontMatterExtension.create(),
+        YouTubeLinkExtension.create(),
+        HeaderExtension.create(),
+        ResizableImageExtension.create(),
+        LinkExtension.create(),
+    )
 
-fun create(): DataSet {
-  return MutableDataSet()
-    .set(Parser.EXTENSIONS, extensions)
-    .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
-    .set(Parser.HTML_BLOCK_PARSER, true)
-    .toImmutable()
-}
+fun create(): DataSet =
+    MutableDataSet()
+        .set(Parser.EXTENSIONS, extensions)
+        .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+        .set(Parser.HTML_BLOCK_PARSER, true)
+        .toImmutable()

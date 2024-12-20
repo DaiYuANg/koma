@@ -25,9 +25,7 @@ dependencies {
   implementation("org.webjars.npm:tailwindcss:4.0.0-beta.3")
 }
 
-java {
-  modularity.inferModulePath.set(true)
-}
+java { modularity.inferModulePath.set(true) }
 
 tasks.compileJava {
   extensions.configure<CompileModuleOptions> {
@@ -37,6 +35,4 @@ tasks.compileJava {
   println(options)
 }
 
-tasks.jar {
-  duplicatesStrategy = DuplicatesStrategy.INCLUDE
-}
+tasks.jar { duplicatesStrategy = DuplicatesStrategy.INCLUDE }

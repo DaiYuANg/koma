@@ -1,5 +1,5 @@
 [versions]
-logback = "1.5.12"
+logback = "1.5.14"
 clikt = "5.0.2"
 slf4j = "2.0.16"
 jackson = "2.18.2"

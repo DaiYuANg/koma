@@ -4,15 +4,13 @@ plugins {
   alias(libs.plugins.ksp)
   alias(libs.plugins.javamodularity)
 }
+
 dependencies {
   implementation(projects.komaShared)
   implementation(libs.thymeleaf)
 }
 
-tasks.test {
-  useJUnitPlatform()
-}
-
+tasks.test { useJUnitPlatform() }
 
 tasks.compileJava {
   extensions.configure<CompileModuleOptions> {
