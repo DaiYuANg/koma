@@ -5,6 +5,7 @@ module org.koma.compiler {
   requires com.google.common;
   requires minify.html;
   requires io.smallrye.mutiny;
+  requires kotlinx.html.jvm;
 
   requires com.fasterxml.jackson.databind;
   requires org.apache.commons.collections4;

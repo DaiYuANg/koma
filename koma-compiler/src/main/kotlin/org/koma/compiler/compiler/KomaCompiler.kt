@@ -3,53 +3,79 @@
 package org.koma.compiler.compiler
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import java.nio.file.Files.walkFileTree
-import java.util.*
-import kotlin.io.path.Path
-import org.apache.commons.io.FileUtils
+import io.smallrye.mutiny.Uni
 import org.koma.compiler.config.KomaConfig
 import org.koma.compiler.context.CompileContext
 import org.koma.compiler.fs.CompileSourceVisitor
-import org.koma.compiler.model.KomaLayout
+import org.koma.compiler.theme.locate
+import org.koma.shared.api.KomaTemplateEngine
+import org.koma.shared.api.KomaTheme
 import org.koma.shared.api.SourceParseableDetector
-import org.koma.shared.api.Template
-import org.koma.shared.api.Theme
+import java.nio.file.Files.walkFileTree
+import java.nio.file.Path
+import java.util.ServiceLoader
+import java.util.concurrent.ExecutorService
+import kotlin.io.path.absolutePathString
 
 class KomaCompiler(
-    private val sourceParsers: Set<SourceParseableDetector> =
-        ServiceLoader.load(SourceParseableDetector::class.java).toSet(),
-    private val themes: Set<Theme> = ServiceLoader.load(Theme::class.java).toSet(),
-    private val templates: Set<Template> = ServiceLoader.load(Template::class.java).toSet()
-) {
+  private val sourceParsers: Set<SourceParseableDetector> =
+    ServiceLoader.load(SourceParseableDetector::class.java).toSet(),
+  private val komaThemes: Set<KomaTheme> = ServiceLoader.load(KomaTheme::class.java).toSet(),
+  private val komaTemplateEngines: Set<KomaTemplateEngine> = ServiceLoader.load(KomaTemplateEngine::class.java).toSet(),
+  private val executor: ExecutorService
+) : Compiler {
   private val log = KotlinLogging.logger {}
+  private val compileContext = CompileContext()
 
   init {
     log.atDebug { message = "source parsers:${sourceParsers.size}" }
-    log.atDebug { message = "themes:${themes}" }
-    log.atDebug { message = "templates:${templates}" }
+    log.atDebug { message = "themes:${komaThemes}" }
+    log.atDebug { message = "templates:${komaTemplateEngines}" }
   }
 
-  fun compile(config: KomaConfig, layout: KomaLayout) {
-    val outputFile = Path(config.output.directory).toFile()
-    if (config.output.clean && outputFile.exists()) {
-      FileUtils.forceDelete(outputFile)
+  override fun compile(config: KomaConfig, context: Path) {
+    parseSourceFiles(config, context)
+    val configTheme = config.metadata.theme
+    val theme = komaThemes.first {
+      it.name() == configTheme
     }
-    val compileContext = CompileContext(sourceParsers)
-    walkFileTree(layout.content, CompileSourceVisitor(compileContext))
+    locate(theme)
+//    theme.javaClass.classLoader.getResource("META-INF/")
+    log.atDebug { message = "find theme${theme}" }
+  }
 
-    //    val templateProcessors = ServiceLoader.load(Template::class.java).toSet()
-    //
-    //    compileContext.htmlContext.forEach { (filename, document) ->
-    //      val body = document.body()
-    //      val template = templateProcessors.first().parse(body.html())
-    //
-    //      val outputPath = Path(config.output.directory, outputFilename(filename,
-    // document.hashCode()))
-    //      FileUtils.writeStringToFile(
-    //        outputPath.toFile(),
-    //        template,
-    //        StandardCharsets.UTF_8
-    //      )
-    //    }
+  private fun parseSourceFiles(config: KomaConfig, context: Path) {
+    val visitor = CompileSourceVisitor(compileContext, sourceParsers)
+    log.atDebug { message = "Compile Context:${context.absolutePathString()}" }
+    val compilePages = Uni.createFrom().item(context.resolve(config.content.pages))
+      .emitOn(executor)
+      .invoke { pages ->
+        run {
+          log.atDebug { message = "Pages:${pages.absolutePathString()}" }
+        }
+      }
+      .invoke { pages ->
+        run {
+          walkFileTree(pages, visitor)
+        }
+      }
+
+    val compilePosts = Uni.createFrom().item(context.resolve(config.content.posts))
+      .emitOn(executor)
+      .invoke { posts ->
+        run {
+          log.atDebug { message = "Pages:${posts.absolutePathString()}" }
+        }
+      }
+      .invoke { posts ->
+        run {
+          walkFileTree(posts, visitor)
+        }
+      }
+
+    Uni.combine().all().unis(compilePosts, compilePages)
+      .usingConcurrencyOf(2)
+      .discardItems()
+      .await().indefinitely()
   }
 }

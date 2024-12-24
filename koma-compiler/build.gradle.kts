@@ -19,9 +19,10 @@ dependencies {
   implementation(libs.minify.html)
   implementation(libs.mutiny)
   implementation(libs.apache.common.collection)
-
+  implementation(libs.kotlinx.html.jvm)
+  implementation(libs.kotlinx.html)
   implementation(projects.komaShared)
-
+  implementation(libs.apache.common.codec)
   implementation("org.webjars.npm:tailwindcss:4.0.0-beta.3")
 }
 

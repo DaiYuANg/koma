@@ -38,22 +38,22 @@ include("feature:koma-asciidoc")
 
 include("feature:koma-markdown")
 
-include("feature:koma-template-thymeleaf")
+include("template-engine:koma-template-thymeleaf")
 
-include("feature:koma-template-freemarker")
+include("template-engine:koma-template-freemarker")
 
 include("feature:koma-deploy-gitlab")
 
-include("feature:koma-template-handlebars")
+include("template-engine:koma-template-handlebars")
 
-include("feature:koma-template-pebble")
+include("template-engine:koma-template-pebble")
 
-include("feature:koma-template-rocker")
+include("template-engine:koma-template-rocker")
 
-include("feature:koma-template-jte")
+include("template-engine:koma-template-jte")
 
 include("module:koma-frontend-ecosystem")
 
-include("feature:koma-theme-bootstrap")
+include("theme:koma-theme-bootstrap")
 
 findProject(":feature:koma-theme-bootstrap")?.name = "koma-theme-bootstrap"

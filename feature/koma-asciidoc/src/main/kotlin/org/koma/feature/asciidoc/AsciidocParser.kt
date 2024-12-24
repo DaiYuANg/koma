@@ -14,19 +14,19 @@ import org.koma.shared.data.structure.KomaDocument
 class AsciidocParser : SourceParser {
   private val log = KotlinLogging.logger {}
 
-  private val asciidoctor = Asciidoctor.Factory.create()
+  private val asciidoctor by lazy { Asciidoctor.Factory.create() }
 
   override fun parse(source: String): KomaDocument {
     val asciiDocument =
-        asciidoctor.load(
-            source,
-            Options.builder().safe(SafeMode.UNSAFE).standalone(true).sourcemap(true).build(),
-        )
+      asciidoctor.load(
+        source,
+        Options.builder().safe(SafeMode.UNSAFE).standalone(true).sourcemap(true).build(),
+      )
     log.atInfo { "Title:${asciiDocument.title}" }
     log.atInfo { "Authors:${asciiDocument.authors}" }
     return KomaDocument(
-        htmlDocument = Jsoup.parseBodyFragment(asciiDocument.convert()),
-        metadata = DocumentMetadata(title = asciiDocument.title, author = null),
+      htmlDocument = Jsoup.parseBodyFragment(asciiDocument.convert()),
+      metadata = DocumentMetadata(title = asciiDocument.title, author = null),
     )
   }
 }

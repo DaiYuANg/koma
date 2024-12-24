@@ -4,6 +4,8 @@ module org.koma.shared {
   requires kotlin.stdlib;
   requires org.eclipse.collections.api;
   requires com.helger.css;
+  requires org.apache.commons.codec;
+  requires com.google.common.jimfs;
 
   exports org.koma.shared.api;
   exports org.koma.shared.context;

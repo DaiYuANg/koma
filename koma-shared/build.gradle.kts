@@ -10,6 +10,8 @@ dependencies {
   compileOnly(libs.jetbrains.annotation)
   implementation(libs.eclipse.collections.api)
   implementation(libs.eclipse.collections)
+  implementation(libs.apache.common.codec)
+  api(libs.jimfs)
   api(libs.jsoup)
   api(libs.ph.css)
 }

@@ -20,27 +20,27 @@ import org.koma.feature.markdown.extension.header.HeaderExtension
 import org.koma.feature.markdown.extension.link.LinkExtension
 
 val extensions =
-    listOf(
-        TablesExtension.create(),
-        StrikethroughExtension.create(),
-        EmojiExtension.create(),
-        AutolinkExtension.create(),
-        AnchorLinkExtension.create(),
-        AdmonitionExtension.create(),
-        AsideExtension.create(),
-        TocExtension.create(),
-        AttributesExtension.create(),
-        EnumeratedReferenceExtension.create(),
-        YamlFrontMatterExtension.create(),
-        YouTubeLinkExtension.create(),
-        HeaderExtension.create(),
-        ResizableImageExtension.create(),
-        LinkExtension.create(),
-    )
+  listOf(
+    TablesExtension.create(),
+    StrikethroughExtension.create(),
+    EmojiExtension.create(),
+    AutolinkExtension.create(),
+    AnchorLinkExtension.create(),
+    AdmonitionExtension.create(),
+    AsideExtension.create(),
+    TocExtension.create(),
+    AttributesExtension.create(),
+    EnumeratedReferenceExtension.create(),
+    YamlFrontMatterExtension.create(),
+    YouTubeLinkExtension.create(),
+    HeaderExtension.create(),
+    ResizableImageExtension.create(),
+//        LinkExtension.create(),
+  )
 
 fun create(): DataSet =
-    MutableDataSet()
-        .set(Parser.EXTENSIONS, extensions)
-        .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
-        .set(Parser.HTML_BLOCK_PARSER, true)
-        .toImmutable()
+  MutableDataSet()
+    .set(Parser.EXTENSIONS, extensions)
+    .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+    .set(Parser.HTML_BLOCK_PARSER, true)
+    .toImmutable()

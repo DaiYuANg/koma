@@ -1,7 +1,7 @@
 package org.koma.compiler.model
 
 import java.nio.file.Path
-import org.koma.compiler.config.FILE_NAME
+import org.koma.compiler.config.KOMA_CONFIG_NAME
 
 data class KomaLayout(
     private val _basePath: Path,
@@ -12,7 +12,7 @@ data class KomaLayout(
   val content: Path
     get() = _basePath.resolve("content")
 
-  fun config(): Path = _basePath.resolve(FILE_NAME)
+  fun config(): Path = _basePath.resolve(KOMA_CONFIG_NAME)
 
   fun assets(): Path = _basePath.resolve("assets")
 
